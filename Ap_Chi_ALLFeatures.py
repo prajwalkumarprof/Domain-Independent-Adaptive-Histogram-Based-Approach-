@@ -22,10 +22,12 @@ if __name__== "__main__":
     b = [67, 90, 0, 79, 24, 98]
  
   #  result = chi2_distance(a, b)
-   # print("The Chi-square distance is :", result)
+#print("The Chi-square distance is :", result)
 
 
 i=0
+
+#path="./testangle2/"
 path="./test2distortion/"
 #path="./fruit-class4/"
 #path="./leaf-class5/"
@@ -90,11 +92,63 @@ def callhistogram(path,imageslist):
         plt.savefig(path+"/"+filename+"Histo-G.png");
         plt.clf()
        # print(axisg[0])
-        
+
+
+
+        print (path+filename)
+        print(" Chi-square distance :")
+        a=[i for i in axisg[0] if i != 0]
+        b=[i for i in axisgray[0] if i != 0]
+
+        resultG = chi2_distance(a, b)
+        print(" D-G The Chi-square distance is :", resultG)
+
+
+      #  print(" D-R  Chi-square distance :")
+        a=[i for i in axisr[0] if i != 0]
+        b=[i for i in axisgray[0] if i != 0]
+
+        resultR = chi2_distance(a, b)
+        print(" D-R The Chi-square distance is :", resultR)   
+
+       # print(" D-B  Chi-square distance :")
+        a=[i for i in axisB[0] if i != 0]
+        b=[i for i in axisgray[0] if i != 0]
+        resultB = chi2_distance(a, b)
+        print(" D-B The Chi-square distance is :", resultB) 
+
+
+        print("  Features distance :" +path+filename)
+        print(" Peak value -Green distance :" )
+        print(axisg[0].max())
+        print(" Peak value -Red distance :" )
+        print(axisr[0].max())
+        print(" Peak value -Blue distance :" )
+        print(axisB[0].max())
+        print(" Peak value -Gray distance :" )
+        print(axisgray[0].max())
+
+
+        alen = len(axisg[0])
+        print("ARRAY LENTH1 ")
+        print(alen)
+
+
+
+
+
         axisgP1 =np.array_split(axisg[0], 2)
         axisrP1 =np.array_split(axisr[0], 2)
         axisBP1  =np.array_split(axisB[0], 2)
         axisgrayP1,axisgrayP2=np.array_split(axisgray, 2)
+
+        alen = len(axisgP1[0])
+        print("ARRAY LENTH part a")
+        print(alen)
+
+        alen = len(axisgP1[1])
+        print("ARRAY LENTH part b")
+        print(alen)
 
         b=[i for i in axisgrayP1[0] if i != 0]
 
@@ -151,34 +205,41 @@ def callhistogram(path,imageslist):
       #  return resultG 
 
 
-
-
 imageslist = []
+
 for filename in os.listdir(path):
     if filename.endswith(".jpg"):
         imageslist.append(filename)
 
+
+        
 callhistogram(path,imageslist)
 
 
-
-
-Directorylist = []
-
+#
 
 
 
-for pathb in os.listdir("."):
-    Directorylist.append(pathb)
 
-Directorylist.sort(key=str.lower)
 
-for pathb in Directorylist:
+
+
+#Directorylist = []
+
+
+
+
+#for pathb in os.listdir("."):
+#    Directorylist.append(pathb)
+
+#Directorylist.sort(key=str.lower)
+
+#for pathb in Directorylist:
   
   #  print(pathb)
-    imageslist = []
-    if os.path.isdir(pathb):
-     for filename in os.listdir(pathb):
-          if filename.endswith(".jpg"):
-            imageslist.append(filename)
+ #   imageslist = []
+ #   if os.path.isdir(pathb):
+ #    for filename in os.listdir(pathb):
+#          if filename.endswith(".jpg"):
+#            imageslist.append(filename)
    #callhistogram(pathb,imageslist)
